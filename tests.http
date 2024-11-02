@@ -1,0 +1,45 @@
+### Test: Purchase a book with quantity 1
+POST http://localhost:5002/purchase/1
+Content-Type: application/json
+
+{
+  "qty": 1
+}
+
+###
+
+### Test: Purchase a book with a larger quantity
+POST http://localhost:5002/purchase/1
+Content-Type: application/json
+
+{
+  "qty": 5
+}
+
+###
+
+### Test: Purchase a book without specifying quantity (defaults to 1)
+POST http://localhost:5002/purchase/2
+Content-Type: application/json
+
+{}
+
+###
+
+### Test: Attempt to purchase a book that may be out of stock
+POST http://localhost:5002/purchase/3
+Content-Type: application/json
+
+{
+  "qty": 100
+}
+
+###
+
+### Test: Check purchase behavior for non-existing book
+POST http://localhost:5002/purchase/999
+Content-Type: application/json
+
+{
+  "qty": 1
+}
