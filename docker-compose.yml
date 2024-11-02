@@ -1,0 +1,22 @@
+services:
+  catalog-service:
+    # Build the catalog-service from the GitHub repository
+    build:
+      context: https://github.com/Bazar-Platform/bazar-catalog-service.git
+    image: bazar-catalog-service:latest
+    container_name: bazar-catalog-service
+    ports:
+      - "5001:5001"
+
+  order-service:
+    # Build the order-service from the local directory
+    build:
+      context: .
+    image: bazar-order-service:latest
+    container_name: bazar-order-service
+    ports:
+      - "5002:5002"
+    environment:
+      - CATALOG_URL=http://bazar-catalog-service:5001
+    depends_on:
+      - catalog-service
